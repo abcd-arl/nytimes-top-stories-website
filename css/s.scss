@@ -339,6 +339,10 @@ button {
 
 			z-index: 1;
 
+			&::-webkit-search-decoration {
+				display: none;
+			}
+
 			&:focus {
 				box-shadow: 0 2px 0 0 rgba(var(--color-blue), 1);
 			}
@@ -745,7 +749,7 @@ main {
 						cursor: pointer;
 
 						background: transparent;
-						background-image: url(icons/search-submit.svg);
+						background-image: url(/icons/search-submit.svg);
 						background-repeat: no-repeat;
 						background-size: 100% 100%;
 					}

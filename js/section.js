@@ -117,6 +117,7 @@ function show() {
 			const searchBarValue = searchBar.value.toLowerCase();
 			let searchedArticles = searchContents(searchBarValue, articles);
 			searchedArticles = sortContentsDate(sortByDate.value, searchedArticles);
+			currentArticles = searchedArticles;
 
 			if (searchedArticles.length === 0) {
 				currentObserver.unobserve(loader);
