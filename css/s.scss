@@ -527,7 +527,7 @@ header {
 			left: 65px;
 
 			input[type='text'] {
-				width: 74%;
+				width: 170px;
 				margin-left: 0.25em;
 			}
 		}
@@ -544,6 +544,10 @@ header {
 						border-bottom: 0.5px solid rgba(var(--color-gray), 0.5);
 						margin-bottom: 1em;
 						font-size: 1em;
+
+						input[type='text'] {
+							width: 74%;
+						}
 
 						&:hover {
 							background-color: inherit;

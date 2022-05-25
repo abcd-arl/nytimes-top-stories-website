@@ -583,7 +583,7 @@ header .header-navigation-container--section .header-search-container {
 }
 
 header .header-navigation-container--section .header-search-container input[type='text'] {
-  width: 74%;
+  width: 170px;
   margin-left: 0.25em;
 }
 
@@ -602,6 +602,10 @@ header .header-navigation-container--section nav ul li:first-child {
   border-bottom: 0.5px solid rgba(var(--color-gray), 0.5);
   margin-bottom: 1em;
   font-size: 1em;
+}
+
+header .header-navigation-container--section nav ul li:first-child input[type='text'] {
+  width: 74%;
 }
 
 header .header-navigation-container--section nav ul li:first-child:hover {
