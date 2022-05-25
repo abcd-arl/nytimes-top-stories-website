@@ -158,6 +158,8 @@ function show() {
 			searchedArticles = sortContentsDate(sortByDate.value, searchedArticles);
 
 			if (searchedArticles.length === 0) {
+				currentObserver.unobserve(loader);
+				loader.classList.add('inactive');
 				sectionPageSearchResult.innerHTML = `<div class="no-result-msg">
 											  <h2>It looks like there isn't any match for '${searchBar.value}'</h2>
 											  <span>Please visit the official site for wider coverage of contents.</span>
@@ -256,6 +258,7 @@ function filterContentsSection(value, contentsObj) {
 }
 
 function searchContents(keyword, contentsObj) {
+	keyword = keyword.toLowerCase();
 	let searchedArticles = {};
 	for (const section in contentsObj) {
 		searchedArticles[section] = contentsObj[section].filter((content) => {

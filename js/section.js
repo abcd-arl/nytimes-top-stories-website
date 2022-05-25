@@ -142,6 +142,7 @@ function hasImg(content) {
 }
 
 function searchContents(keyword, contents) {
+	keyword = keyword.toLowerCase();
 	let searchedArticles = [];
 	searchedArticles = contents.filter((content) => {
 		return (

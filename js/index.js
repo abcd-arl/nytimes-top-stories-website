@@ -118,21 +118,21 @@ function show() {
 		noDuplicatesToHomeSection('all abstract', articles['world news']),
 		'/world.html'
 	);
-	addContentsSectionAllImg('Business', noDuplicatesToHomeSection('all img', articles['business']), '/business.html');
+	addContentsSectionAllImg('Business', noDuplicatesToHomeSection('all img', articles['business']), 'business.html');
 
 	addContentsSectionSplit(articles['home'].slice(8, 15));
 	addContentsSectionAllImg(
 		'U.S. Politics',
 		noDuplicatesToHomeSection('all img', articles['u.s. politics']),
-		'/politics.html'
+		'politics.html'
 	);
 
 	addContentsSectionSplit(articles['home'].slice(15, 22));
-	addContentsSectionAllImg('Arts', noDuplicatesToHomeSection('all img', articles['arts']), '/arts.htmls');
+	addContentsSectionAllImg('Arts', noDuplicatesToHomeSection('all img', articles['arts']), 'arts.htmls');
 	addContentsSectionAllAbstract(
 		'Technology',
 		noDuplicatesToHomeSection('all abstract', articles['technology']),
-		'/technology.html'
+		'technology.html'
 	);
 }
 
