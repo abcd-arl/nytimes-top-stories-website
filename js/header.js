@@ -15,7 +15,7 @@ const closeIcons = Array.from(header.querySelectorAll('.btn-icon--close'));
 
 hamburgerIcon.addEventListener('click', (e) => {
 	activateElement(headerNavSection, closeIcons, e);
-	focusElement(searchInputNav);
+	// focusElement(searchInputNav);
 });
 
 actionIcon.addEventListener('click', (e) => {
