@@ -1,23 +1,23 @@
 @font-face {
 	font-family: Cheltenham;
-	src: url('/fonts/cheltenham-normal-400.ttf');
+	src: url('fonts/cheltenham-normal-400.ttf');
 }
 
 @font-face {
 	font-family: Cheltenham;
 	font-weight: bold;
-	src: url('/fonts/cheltenham-normal-700.ttf');
+	src: url('fonts/cheltenham-normal-700.ttf');
 }
 
 @font-face {
 	font-family: Imperial;
-	src: url('/fonts/imperial-normal-500.ttf');
+	src: url('fonts/imperial-normal-500.ttf');
 }
 
 @font-face {
 	font-family: Imperial;
 	font-weight: bold;
-	src: url('/fonts/imperial-normal-700.ttf');
+	src: url('fonts/imperial-normal-700.ttf');
 }
 
 :root {
@@ -527,7 +527,7 @@ header {
 			left: 65px;
 
 			input[type='text'] {
-				width: 170px;
+				width: 74%;
 				margin-left: 0.25em;
 			}
 		}
@@ -741,7 +741,7 @@ main {
 						cursor: pointer;
 
 						background: transparent;
-						background-image: url(/icons/search-submit.svg);
+						background-image: url(icons/search-submit.svg);
 						background-repeat: no-repeat;
 						background-size: 100% 100%;
 					}

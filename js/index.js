@@ -80,7 +80,7 @@ if (sessionStorage.getItem('articles') === null) {
 			if (err.message == '429') {
 				main.innerHTML = `<section class="error-message">
 										<div class="error-message__icon">
-											<img src="/icons/sad.svg" alt="broken heart" />
+											<img src="icons/sad.svg" alt="broken heart" />
 										</div>
 										<div class="error-message__text">
 											<h1>Huhu!</h1>
@@ -91,7 +91,7 @@ if (sessionStorage.getItem('articles') === null) {
 			} else {
 				main.innerHTML = `<section class="error-message">
 										<div class="error-message__icon">
-											<img src="/icons/heart-broken.svg" alt="broken heart" />
+											<img src="icons/heart-broken.svg" alt="broken heart" />
 										</div>
 										<div class="error-message__text">
 											<h1>Oh no!</h1>
