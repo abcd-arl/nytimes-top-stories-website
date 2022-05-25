@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="/css/s.css" />
+	</head>
+	<body>
+		<header>
+			<div class="header-navigation-container--section">
+				<button id="btn-hamburger" class="btn-icon">
+					<img src="/icons/hamburger.svg" alt="menu icon" />
+				</button>
+				<button id="btn-search" class="btn-icon">
+					<img src="/icons/search.svg" alt="search icon" />
+				</button>
+				<nav class="inactive">
+					<button class="btn-icon btn-icon--close">
+						<img src="/icons/close.svg" alt="menu icon" />
+					</button>
+					<ul>
+						<li>
+							<form action="search.html" class="header-search-container">
+								<input type="text" placeholder="SEARCH" id="header-search--nav" class="header-search-input" required />
+								<input type="submit" value="GO" class="btn-submit" />
+							</form>
+						</li>
+						<li><a href="/index.html">Home</a></li>
+						<li><a href="/arts.html">Arts</a></li>
+						<li><a href="/business.html">Business</a></li>
+						<li><a href="/politics.html">Politics</a></li>
+						<li><a href="/technology.html">Technology</a></li>
+						<li><a href="/world.html">World</a></li>
+					</ul>
+				</nav>
+				<form action="search.html" class="header-search-container inactive">
+					<input type="text" placeholder="SEARCH" id="header-search--header" class="header-search-input" required />
+					<input type="submit" value="GO" class="btn-submit" />
+				</form>
+			</div>
+
+			<div class="logo-nytimes">
+				<a href="/index.html">
+					<img
+						src="https://upload.wikimedia.org/wikipedia/commons/5/58/NewYorkTimes.svg"
+						alt="The New York Times logo"
+					/>
+				</a>
+			</div>
+
+			<div class="header-navigation-container--action">
+				<button id="btn-action" class="btn-icon">
+					<img src="/icons/star-svgrepo-com.svg" alt="action icon" />
+				</button>
+				<a href="https://www.nytimes.com/international/" class="btn-link">
+					<span>GO TO OFFICIAL SITE</span>
+				</a>
+				<nav class="inactive">
+					<button class="btn-icon btn-icon--close">
+						<img src="/icons/close.svg" alt="menu icon" />
+					</button>
+					<ul>
+						<li><a href="https://www.nytimes.com/international/">GO TO OFFICIAL SITE</a></li>
+						<li><a href="https://www.nytimes.com/subscription?campaignId=9YU8R">SUBSCRIBE</a></li>
+						<li><a href="https://developer.nytimes.com/apis">ABOUT NYTIMES API</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<main>
+			<template id="template-content--d-a-i">
+				<article class="content">
+					<div id="content-date" class="content__date">
+						<div class="skeleton skeleton-text skeleton-text--md"></div>
+					</div>
+					<a href="" id="content-src" class="content__src" target="_blank">
+						<div class="content__text">
+							<h3 id="content-title" class="content__title">
+								<div class="skeleton skeleton-text skeleton-text--md"></div>
+							</h3>
+							<small id="content-writers" class="content__writers">
+								<div class="skeleton skeleton-text skeleton-text--sm"></div>
+							</small>
+							<div id="content-abstract" class="content__abstract">
+								<div class="skeleton skeleton-text margin-bottom--sm"></div>
+								<div class="skeleton skeleton-text margin-bottom--sm"></div>
+								<div class="skeleton skeleton-text margin-bottom--sm"></div>
+							</div>
+						</div>
+						<div class="content__thumbnail">
+							<img id="content-thumbnail" class="skeleton skeleton-thumbnail" src="" alt="" />
+						</div>
+					</a>
+				</article>
+			</template>
+			<div class="search-page">
+				<section class="section-page__search-container">
+					<div class="search-bar">
+						<div class="search-bar__input">
+							<input type="search" placeholder="SEARCH" autocomplete="off" required />
+							<input type="submit" value="" />
+						</div>
+						<div class="search-bar__sort-container">
+							<div class="search-bar__sort search-bar__sort--date">
+								<label>Date</label>
+								<select name="sort-date" id="sort-date" autocomplete="off">
+									<option value="none" selected>None</option>
+									<option value="newest">Newest</option>
+									<option value="oldest">Oldest</option>
+								</select>
+							</div>
+							<div class="search-bar__sort search-bar__sort--section">
+								<label>Section</label>
+								<select name="sort-section" id="sort-section" autocomplete="off">
+									<option value="none" selected>All</option>
+									<option value="arts">Arts</option>
+									<option value="business">Business</option>
+									<option value="u.s. politics">U.S Politics</option>
+									<option value="technology">Technology</option>
+									<option value="world news">World</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<section id="search-result" class="search-result"> </section>
+					<div class="search-result__loader inactive"></div>
+				</section>
+			</div>
+		</main>
+		<footer>
+			<div>
+				<ul class="sections">
+					<div>
+						<li><a href="/index.html">Home Page</a></li>
+						<li><a href="/arts.html">Arts</a></li>
+						<li><a href="/business.html">Business</a></li>
+					</div>
+					<div>
+						<li><a href="/politics.html">U.S. Politics</a></li>
+						<li><a href="/technology.html">Technology</a></li>
+						<li><a href="/world.html">World</a></li>
+					</div>
+				</ul>
+				<ul class="nytimes">
+					<li><a href="https://www.nytimes.com/international/">Go to Official Site</a></li>
+					<li><a href="https://www.nytimes.com/subscription?campaignId=9YU8R">Subscribe</a></li>
+					<li><a href="https://developer.nytimes.com/apis">About NYTimes API</a></li>
+				</ul>
+				<ul class="dev">
+					<li><a href="">Source Code</a></li>
+					<li><a href="mailto:lingga.abdulrahman.u@gmail.com">Contact Developer</a></li>
+					<li>Abdulrahman Lingga</li>
+				</ul>
+			</div>
+		</footer>
+	</body>
+	<script src="/js/header.js"></script>
+	<script src="/js/search.js"></script>
+</html>
