@@ -116,7 +116,7 @@ function show() {
 	addContentsSectionAllAbstract(
 		'World',
 		noDuplicatesToHomeSection('all abstract', articles['world news']),
-		'/world.html'
+		'world.html'
 	);
 	addContentsSectionAllImg('Business', noDuplicatesToHomeSection('all img', articles['business']), 'business.html');
 
@@ -128,7 +128,7 @@ function show() {
 	);
 
 	addContentsSectionSplit(articles['home'].slice(15, 22));
-	addContentsSectionAllImg('Arts', noDuplicatesToHomeSection('all img', articles['arts']), 'arts.htmls');
+	addContentsSectionAllImg('Arts', noDuplicatesToHomeSection('all img', articles['arts']), 'arts.html');
 	addContentsSectionAllAbstract(
 		'Technology',
 		noDuplicatesToHomeSection('all abstract', articles['technology']),
