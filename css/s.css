@@ -847,9 +847,9 @@ main .error-message {
           align-items: center;
 }
 
-main .error-message #to-default-contents {
+main .error-message .to-default-contents {
   cursor: pointer;
-  color: blue;
+  color: rgba(var(--color-blue), 1);
 }
 
 main .error-message__icon {

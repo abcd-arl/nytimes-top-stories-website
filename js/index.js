@@ -91,7 +91,7 @@ if (sessionStorage.getItem('articles') === null) {
 											<h1>Huhu!</h1>
 												<p>We've reached the rate limit. The NYTimes API only allows ten uninterrupted requests per minute.</p>
 												<p>This usually do not take a while, please wait a few seconds and hit refresh.</p>
-												<p><br>If you prefer, you may click <span id='to-default-contents'>here</span> to show the default contents instead.</p>
+												<p><br>If you prefer, you may click <span class='to-default-contents'>here</span> to show the default contents instead.</p>
 										</div>
 									</section>`;
 				setToDefaultContents();
@@ -102,10 +102,10 @@ if (sessionStorage.getItem('articles') === null) {
 										</div>
 										<div class="error-message__text">
 											<h1>Oh no!</h1>
-												<p>Something went wrong while fetching data. Are you sure you are online? If yes, this should not be the case.</p>
-												<p>Please let me know by sending me an email 
-													(<a href="mailto:lingga.abdulrahman.u@gmail.com?subject=NYTimes Top Stories Project Error">lingga.abdulrahman.u@gmail.com</a>).</p>
-												<p>Thank you and sorry for all the inconvenience.</p>
+											<p>Something went wrong while fetching data. Are you sure you are online?</p>
+											<p>If yes, this should not be the case. Please let me know by sending me an <a href="mailto:lingga.abdulrahman.u@gmail.com?subject=NYTimes Top Stories Project Error">email</a>.</p>
+											<p>Thank you and sorry for all the inconvenience.</p>
+											<p><br>In the meantime, you may click <span class='to-default-contents'>here</span> to show the default contents instead.</p>
 										</div>
 									</section>`;
 			}
@@ -176,10 +176,12 @@ function noDuplicatesToHomeSection(type, sectionArticles) {
 /* ============ ======================================= ============ */
 
 function setToDefaultContents() {
-	const toDefault = document.querySelector('#to-default-contents');
-	toDefault.addEventListener('click', (e) => {
-		sessionStorage.setURLSDefault = true;
-		location.reload();
+	const toDefaults = document.querySelectorAll('#to-default-contents');
+	toDefault.forEach((toDefault) => {
+		toDefault.addEventListener('click', (e) => {
+			sessionStorage.setURLSDefault = true;
+			location.reload();
+		});
 	});
 }
 

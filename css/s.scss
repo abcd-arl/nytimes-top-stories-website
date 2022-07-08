@@ -769,9 +769,9 @@ main {
 		justify-content: center;
 		align-items: center;
 
-		#to-default-contents {
+		.to-default-contents {
 			cursor: pointer;
-			color: blue;
+			color: rgba(var(--color-blue), 1);
 		}
 
 		&__icon {
