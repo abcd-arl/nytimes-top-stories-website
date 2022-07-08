@@ -94,7 +94,6 @@ if (sessionStorage.getItem('articles') === null) {
 												<p><br>If you prefer, you may click <span class='to-default-contents'>here</span> to show the default contents instead.</p>
 										</div>
 									</section>`;
-				setToDefaultContents();
 			} else {
 				main.innerHTML = `<section class="error-message">
 										<div class="error-message__icon">
@@ -109,6 +108,8 @@ if (sessionStorage.getItem('articles') === null) {
 										</div>
 									</section>`;
 			}
+
+			setToDefaultContents();
 		});
 } else {
 	articles = JSON.parse(sessionStorage.getItem('articles'));
@@ -176,8 +177,8 @@ function noDuplicatesToHomeSection(type, sectionArticles) {
 /* ============ ======================================= ============ */
 
 function setToDefaultContents() {
-	const toDefaults = document.querySelectorAll('#to-default-contents');
-	toDefault.forEach((toDefault) => {
+	const toDefaults = document.querySelectorAll('.to-default-contents');
+	toDefaults.forEach((toDefault) => {
 		toDefault.addEventListener('click', (e) => {
 			sessionStorage.setURLSDefault = true;
 			location.reload();
