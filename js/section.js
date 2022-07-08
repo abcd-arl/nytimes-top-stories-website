@@ -40,14 +40,26 @@ for (let i = 0; i < 4; i++) {
 var articles = null;
 
 if (sessionStorage.getItem('articles') === null) {
-	const urls = [
-		'https://api.nytimes.com/svc/topstories/v2/home.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
-		'https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
-		'https://api.nytimes.com/svc/topstories/v2/business.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
-		'https://api.nytimes.com/svc/topstories/v2/politics.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
-		'https://api.nytimes.com/svc/topstories/v2/technology.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
-		'https://api.nytimes.com/svc/topstories/v2/world.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
-	];
+	let urls = null;
+	if (sessionStorage.setURLSDefault) {
+		urls = [
+			'json/home.json',
+			'json/arts.json',
+			'json/business.json',
+			'json/politics.json',
+			'json/technology.json',
+			'json/world.json',
+		];
+	} else {
+		urls = [
+			'https://api.nytimes.com/svc/topstories/v2/home.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
+			'https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
+			'https://api.nytimes.com/svc/topstories/v2/business.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
+			'https://api.nytimes.com/svc/topstories/v2/politics.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
+			'https://api.nytimes.com/svc/topstories/v2/technology.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
+			'https://api.nytimes.com/svc/topstories/v2/world.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
+		];
+	}
 
 	Promise.all(urls.map((url) => fetch(url)))
 		.then((responses) => {
@@ -57,16 +69,18 @@ if (sessionStorage.getItem('articles') === null) {
 			return Promise.all(responses.map((response) => response.json()));
 		})
 		.then((responses) => {
-			let articles = {};
+			articles = {};
 			responses.forEach((response) => {
 				articles[response.section.toLowerCase()] = response.results.filter(isArticle).filter(hasImg);
 			});
 			sessionStorage.setItem('articles', JSON.stringify(articles));
+			articles = articles[section];
 			show();
 		})
 		.catch((err) => {
 			console.log(err.message);
 			const main = document.querySelector('main');
+			main.style.pointerEvents = 'unset';
 
 			if (err.message == '429') {
 				main.innerHTML = `<section class="error-message">
@@ -77,8 +91,10 @@ if (sessionStorage.getItem('articles') === null) {
 											<h1>Huhu!</h1>
 												<p>We've reached the rate limit. The NYTimes API only allows ten uninterrupted requests per minute.</p>
 												<p>This usually do not take a while, please wait a few seconds and hit refresh.</p>
+												<p><br>If you prefer, you may click <span id='to-default-contents'>here</span> to show the default contents instead.</p>
 										</div>
 									</section>`;
+				setToDefaultContents();
 			} else {
 				main.innerHTML = `<section class="error-message">
 										<div class="error-message__icon">
@@ -86,7 +102,7 @@ if (sessionStorage.getItem('articles') === null) {
 										</div>
 										<div class="error-message__text">
 											<h1>Oh no!</h1>
-												<p>Something went wrong while fetching data. This should not be the case.</p>
+												<p>Something went wrong while fetching data. Are you sure you are online? If yes, this should not be the case.</p>
 												<p>Please let me know by sending me an email 
 													(<a href="mailto:lingga.abdulrahman.u@gmail.com?subject=NYTimes Top Stories Project Error">lingga.abdulrahman.u@gmail.com</a>).</p>
 												<p>Thank you and sorry for all the inconvenience.</p>
@@ -100,6 +116,11 @@ if (sessionStorage.getItem('articles') === null) {
 }
 
 function show() {
+	const main = document.querySelector('main');
+	main.style.pointerEvents = 'unset';
+
+	console.log(articles[section]);
+
 	currentArticles = articles.slice(4);
 
 	addContentsSectionPageTop(articles.slice(0, 4));
@@ -130,6 +151,14 @@ function show() {
 				addContentsSectionPageSearchResult(searchedArticles);
 			}
 		}
+	});
+}
+
+function setToDefaultContents() {
+	const toDefault = document.querySelector('#to-default-contents');
+	toDefault.addEventListener('click', (e) => {
+		sessionStorage.setURLSDefault = true;
+		location.reload();
 	});
 }
 
@@ -225,10 +254,9 @@ function createContent(type, article) {
 	let div = null;
 	switch (true) {
 		case type == 4:
-			div = contentDateAbstractImgTemplate.content.cloneNode(true);
-			const dateOptions = { weekday: 'short', year: '2-digit', month: 'short', day: 'numeric' };
 			const articleDate = new Date(article.updated_date);
-			div.getElementById('content-date').textContent = articleDate.toLocaleDateString('en-US', dateOptions);
+			div = contentDateAbstractImgTemplate.content.cloneNode(true);
+			div.getElementById('content-date').textContent = getPassedTime(articleDate);
 
 		case type == 3:
 			if (type == 3) div = contentImgTemplate.content.cloneNode(true);
@@ -263,4 +291,42 @@ function createContent(type, article) {
 	}
 
 	return div;
+}
+
+function getPassedTime(articleDate) {
+	const d1 = Date.parse(articleDate);
+	const d2 = Date.parse(new Date());
+	console.log(d1, d2, 'hello');
+
+	let seconds = (d2 - d1) / 1000;
+	const days = parseInt(seconds / 86400);
+	seconds = seconds % 86400;
+
+	const hours = parseInt(seconds / 3600);
+	seconds = seconds % 3600;
+
+	const minutes = parseInt(seconds / 60);
+	seconds = seconds % 60;
+
+	if (days > 1) {
+		const dateOptions = { weekday: 'short', year: '2-digit', month: 'short', day: 'numeric' };
+		const d = new Date(articleDate);
+		return d.toLocaleDateString('en-US', dateOptions);
+	} else if (days == 1) {
+		return days + ' day ago';
+	} else if (days == 0 && hours == 1) {
+		return hours + ' hour ago';
+	} else if (days == 0 && hours > 1) {
+		return hours + ' hours ago';
+	} else if (hours == 0 && minutes == 1) {
+		return minutes + ' minute ago';
+	} else if (hours == 0 && minutes > 1) {
+		return minutes + ' minutes ago';
+	} else if (minutes == 0 && seconds == 1) {
+		return seconds + ' second ago';
+	} else if (minutes == 0 && seconds > 1) {
+		return seconds + ' seconds ago';
+	} else if (seconds == 0) {
+		return 'Just now';
+	}
 }

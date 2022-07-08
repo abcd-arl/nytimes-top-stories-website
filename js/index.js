@@ -36,26 +36,30 @@ homePage.append(sectionAllAbstractTemplate.content.cloneNode(true));
 /* ============ get and display contents from nytimes api ============ */
 
 // set all needed urls
-// const urls = [
-// 	'/json/home.json',
-// 	'/json/arts.json',
-// 	'/json/business.json',
-// 	'/json/politics.json',
-// 	'/json/technology.json',
-// 	'/json/world.json',
-// ];
 
 var articles = null;
 
 if (sessionStorage.getItem('articles') === null) {
-	const urls = [
-		'https://api.nytimes.com/svc/topstories/v2/home.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
-		'https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
-		'https://api.nytimes.com/svc/topstories/v2/business.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
-		'https://api.nytimes.com/svc/topstories/v2/politics.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
-		'https://api.nytimes.com/svc/topstories/v2/technology.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
-		'https://api.nytimes.com/svc/topstories/v2/world.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
-	];
+	let urls = null;
+	if (sessionStorage.setURLSDefault) {
+		urls = [
+			'json/home.json',
+			'json/arts.json',
+			'json/business.json',
+			'json/politics.json',
+			'json/technology.json',
+			'json/world.json',
+		];
+	} else {
+		urls = [
+			'https://api.nytimes.com/svc/topstories/v2/home.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
+			'https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
+			'https://api.nytimes.com/svc/topstories/v2/business.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
+			'https://api.nytimes.com/svc/topstories/v2/politics.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
+			'https://api.nytimes.com/svc/topstories/v2/technology.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
+			'https://api.nytimes.com/svc/topstories/v2/world.json?api-key=Tnvbu9EtAVibnUG5FKRSWVjamDjyaPhD',
+		];
+	}
 
 	Promise.all(urls.map((url) => fetch(url)))
 		.then((responses) => {
@@ -76,6 +80,7 @@ if (sessionStorage.getItem('articles') === null) {
 		.catch((err) => {
 			console.log(err.message);
 			const main = document.querySelector('main');
+			main.style.pointerEvents = 'unset';
 
 			if (err.message == '429') {
 				main.innerHTML = `<section class="error-message">
@@ -86,8 +91,10 @@ if (sessionStorage.getItem('articles') === null) {
 											<h1>Huhu!</h1>
 												<p>We've reached the rate limit. The NYTimes API only allows ten uninterrupted requests per minute.</p>
 												<p>This usually do not take a while, please wait a few seconds and hit refresh.</p>
+												<p><br>If you prefer, you may click <span id='to-default-contents'>here</span> to show the default contents instead.</p>
 										</div>
 									</section>`;
+				setToDefaultContents();
 			} else {
 				main.innerHTML = `<section class="error-message">
 										<div class="error-message__icon">
@@ -95,7 +102,7 @@ if (sessionStorage.getItem('articles') === null) {
 										</div>
 										<div class="error-message__text">
 											<h1>Oh no!</h1>
-												<p>Something went wrong while fetching data. This should not be the case.</p>
+												<p>Something went wrong while fetching data. Are you sure you are online? If yes, this should not be the case.</p>
 												<p>Please let me know by sending me an email 
 													(<a href="mailto:lingga.abdulrahman.u@gmail.com?subject=NYTimes Top Stories Project Error">lingga.abdulrahman.u@gmail.com</a>).</p>
 												<p>Thank you and sorry for all the inconvenience.</p>
@@ -109,6 +116,8 @@ if (sessionStorage.getItem('articles') === null) {
 }
 
 function show() {
+	const main = document.querySelector('main');
+	main.style.pointerEvents = 'unset';
 	homePage.innerHTML = '';
 	addContentsSectionTop(articles['home'][0]);
 
@@ -165,6 +174,14 @@ function noDuplicatesToHomeSection(type, sectionArticles) {
 }
 
 /* ============ ======================================= ============ */
+
+function setToDefaultContents() {
+	const toDefault = document.querySelector('#to-default-contents');
+	toDefault.addEventListener('click', (e) => {
+		sessionStorage.setURLSDefault = true;
+		location.reload();
+	});
+}
 
 function isArticle(article) {
 	return article.item_type === 'Article';

@@ -14,8 +14,16 @@ const searchInputNav = header.querySelector('#header-search--nav');
 const closeIcons = Array.from(header.querySelectorAll('.btn-icon--close'));
 
 hamburgerIcon.addEventListener('click', (e) => {
-	activateElement(headerNavSection, closeIcons, e);
-	// focusElement(searchInputNav);
+	// activateElement(headerNavSection, closeIcons, e);
+
+	headerNavSection.classList.remove('inactive');
+	focusElement(searchInputNav);
+
+	closeIcons.forEach((closeIcon) => {
+		closeIcon.addEventListener('click', (e) => {
+			headerNavSection.classList.add('inactive');
+		});
+	});
 });
 
 actionIcon.addEventListener('click', (e) => {
